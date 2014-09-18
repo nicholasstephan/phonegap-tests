@@ -29,6 +29,7 @@
 
     <gap:plugin name="nl.x-services.plugins.socialsharing" version="4.3.0" />
     <gap:plugin name="org.apache.cordova.media-capture" version="0.2.8" />
+    <gap:plugin name="org.apache.cordova.contacts" version="0.2.11" />
 
 
 
