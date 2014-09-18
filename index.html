@@ -71,7 +71,8 @@
           $scope.notifications = [];
 
 
-          $('document').on('deviceready', function() {
+          angular.element(document).on('deviceready', function() {
+            alert('device ready')
             pushNotification = window.plugins.pushNotification;
             if (device.platform.toLowerCase() == 'android') {
               $scope.notifications.push("registering Android");
@@ -317,6 +318,7 @@
         <ul>
           <li ng-repeat="notification in notifications">{notification}</li>
         </ul>
+      </section>
 
       <section>
         <h2>Contacts</h2>
