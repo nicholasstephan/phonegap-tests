@@ -106,16 +106,15 @@
 
           // handle APNS notifications for iOS
           window.onNotificationAPN = function(e) {
-            $scope.notifications.push("push-notification received");
-
             if (e.alert) {
-              $scope.notifications.push(e.alert);
+              $scope.notifications.push("push notification: " + e.alert);
               navigator.notification.alert(e.alert);
             }
 
             if (e.sound) {
               try {
-                var snd = new Media(e.sound);
+                // var snd = new Media(e.sound);
+                var snd = new Audio(e.sound);
                 snd.play();
               } catch (e) {
                 alert("new Media?")
@@ -150,7 +149,8 @@
 
                   // if the notification contains a soundname, play it.
                   try {
-                    var my_media = new Media("/android_asset/www/" + e.soundname);
+                    // var my_media = new Media("/android_asset/www/" + e.soundname);
+                    var my_media = new Audio("/android_asset/www/" + e.soundname);
                     my_media.play();
                   } catch (e) {
                     alert("new Media?");
