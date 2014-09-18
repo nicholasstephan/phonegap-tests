@@ -89,17 +89,20 @@
 
 
           angular.element(document).on('deviceready', function() {
+            $scope.notifications.push("device is ready");
             pushNotification = window.plugins.pushNotification;
-            if (device.platform.toLowerCase() == 'android') {
-              $scope.notifications.push("registering Android");
-              pushNotification.register(successHandler, errorHandler, {"senderID":"661780372179","ecb":"onNotificationGCM"});// required!
-            } else {
+            // note: device wasn't found, and window.device doesn't have a platform property
+            // what is going on here?
+            // if (device.platform.toLowerCase() == 'android') {
+              // $scope.notifications.push("registering Android");
+              // pushNotification.register(successHandler, errorHandler, {"senderID":"661780372179","ecb":"onNotificationGCM"});// required!
+            // } else {
               $scope.notifications.push("registering iOS");
               pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});    // required!
-            }
+            // }
             $scope.$apply();
           });
-          
+
 
           // handle APNS notifications for iOS
           function onNotificationAPN(e) {
@@ -333,7 +336,7 @@
         <h2>Notifications</h2>
 
         <ul>
-          <li ng-repeat="notification in notifications">{notification}</li>
+          <li ng-repeat="notification in notifications">{{notification}}</li>
         </ul>
       </section>
 
