@@ -17,14 +17,7 @@
       }
 
       body {
-        background: rgb(167,199,220);
-        background: -moz-linear-gradient(top,  rgba(167,199,220,1) 0%, rgba(133,178,211,1) 100%);
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(167,199,220,1)), color-stop(100%,rgba(133,178,211,1)));
-        background: -webkit-linear-gradient(top,  rgba(167,199,220,1) 0%,rgba(133,178,211,1) 100%);
-        background: -o-linear-gradient(top,  rgba(167,199,220,1) 0%,rgba(133,178,211,1) 100%);
-        background: -ms-linear-gradient(top,  rgba(167,199,220,1) 0%,rgba(133,178,211,1) 100%);
-        background: linear-gradient(to bottom,  rgba(167,199,220,1) 0%,rgba(133,178,211,1) 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a7c7dc', endColorstr='#85b2d3',GradientType=0 );
+        background:#333;
       }
 
       button {
@@ -35,10 +28,19 @@
         border:0;
         margin:0 0 8px 0;
         background:#eee;
+        line-height:50px;
       }
 
-      h1 {
+      button i {
+        display:inline-block;
+        vertical-align: top;
+      }
+
+      h1, h2 {
+        color:white;
         text-align: center;
+        font-weight:normal;
+        font-size:16px;
       }
 
       section {
@@ -57,13 +59,67 @@
         .controller('AppCtrl', function($scope) {
 
 
+          $scope.captureAudio = function() {
+            var captureSuccess = function(mediaFiles) {
+              var i, path, len;
+              for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+                path = mediaFiles[i].fullPath;
+                // do something interesting with the file
+              }
+            };
+
+            // capture error callback
+            var captureError = function(error) {
+              navigator.notification.alert('Error code: ' + error.code, null, 'Capture Error');
+            };
+
+            // start audio capture
+            navigator.device.capture.captureAudio(captureSuccess, captureError, {limit:2});
+          };
+
+          $scope.captureImage = function() {
+            var captureSuccess = function(mediaFiles) {
+              var i, path, len;
+              for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+                path = mediaFiles[i].fullPath;
+                // do something interesting with the file
+              }
+            };
+
+            // capture error callback
+            var captureError = function(error) {
+              navigator.notification.alert('Error code: ' + error.code, null, 'Capture Error');
+            };
+
+            // start audio capture
+            navigator.device.capture.captureImage(captureSuccess, captureError, {limit:2});
+          };
+
+          $scope.captureVideo = function() {
+            var captureSuccess = function(mediaFiles) {
+              var i, path, len;
+              for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+                path = mediaFiles[i].fullPath;
+                // do something interesting with the file
+              }
+            };
+
+            // capture error callback
+            var captureError = function(error) {
+              navigator.notification.alert('Error code: ' + error.code, null, 'Capture Error');
+            };
+
+            // start audio capture
+            navigator.device.capture.captureVideo(captureSuccess, captureError, {limit:2});
+          };
+
           $scope.share = function() {
             console.log('share');
             window.plugins.socialsharing.share(
               "Message", 
               "A subject line",
               "https://www.google.nl/images/srpr/logo4w.png", // image
-              null, // link url
+              "https://www.google.com", // link url
               function() {
                 console.log('share ok');
               }, 
@@ -114,6 +170,7 @@
             window.plugins.socialsharing.shareViaSMS(
               'My cool message', 
               '7602150986', // comma separated phone numbers
+              "https://www.google.nl/images/srpr/logo4w.png", // image
               function(msg) {
                 console.log('ok: ' + msg);
               }, 
@@ -124,15 +181,13 @@
           };
 
           
-        })
+        });
 
     </script>
 
   </head>
   <body>
     <div id="app" ng-controller="AppCtrl">
-      <h1>Test</h1>
-
 
       <section>
         <h2>Contacts</h2>
@@ -141,31 +196,43 @@
 
 
       <section>
-        <h2>Camera</h2>
+        <h2>Media Capture</h2>
 
+        <button ng-click="captureAudio()">
+          <i class="glyphicons microphone"></i> Audio
+        </button>
+
+        <button ng-click="captureImage()">
+          <i class="glyphicons picture"></i> Image
+        </button>
+
+        <button ng-click="captureVideo()">
+          <i class="glyphicons facetime_video"></i> Video
+        </button>
       </section>
 
 
       <section>
         <h2>Sharing</h2>
+
         <button ng-click="share()">
-          <i class="glyphicons share"></i>
+          <i class="glyphicons share"></i> Device Share
         </button>
 
         <button ng-click="shareFacebook()">
-          <i class="social facebook"></i>
+          <i class="social facebook"></i> Facebook
         </button>
 
         <button ng-click="shareTwitter()">
-          <i class="social twitter"></i>
+          <i class="social twitter"></i> Twitter
         </button>
 
         <button ng-click="shareEmail()">
-          <i class="glyphicons envelope"></i>
+          <i class="glyphicons envelope"></i> Email
         </button>
 
         <button ng-click="shareSMS()">
-          <i class="glyphicons chat"></i>
+          <i class="glyphicons chat"></i> SMS
         </button>
       </section>
 
