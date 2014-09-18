@@ -57,6 +57,20 @@
         padding:32px;
       }
 
+      ul {
+        box-sizing:border-box;
+        width:100%;
+      }
+
+      li {
+        width:100%;
+        color:white;
+        text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow:ellipsis;
+      }
+
     </style>
 
     <script src="cordova.js"></script>
@@ -72,7 +86,6 @@
 
 
           angular.element(document).on('deviceready', function() {
-            alert('device ready')
             pushNotification = window.plugins.pushNotification;
             if (device.platform.toLowerCase() == 'android') {
               $scope.notifications.push("registering Android");
