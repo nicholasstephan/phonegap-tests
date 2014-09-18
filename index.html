@@ -74,6 +74,7 @@
     </style>
 
     <script src="cordova.js"></script>
+    <script src="PushNotification.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0-beta.13/angular.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0-beta.13/angular-touch.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0-beta.13/angular-animate.js"></script>
@@ -81,6 +82,8 @@
     <script>
       angular.module('App', ['ngTouch', 'ngAnimate'])
         .controller('AppCtrl', function($scope) {
+
+          var pushNotification;
 
           $scope.notifications = [];
 
@@ -96,6 +99,7 @@
             }
             $scope.$apply();
           });
+          
 
           // handle APNS notifications for iOS
           function onNotificationAPN(e) {
