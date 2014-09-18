@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns   = "http://www.w3.org/ns/widgets"
+        xmlns:gap   = "http://phonegap.com/ns/1.0"
+        id          = "com.nicholasstephan.test"
+        versionCode = "10" 
+        version     = "1.0.0" >
+
+    <!-- versionCode is optional and Android only -->
+
+    <name>Phonegap Build Test</name>
+
+    <description>
+        An example for phonegap build docs. 
+    </description>
+
+    <author href="" email="nicholas.stephan@gmail.com">
+        Nicholas Stephan
+    </author>
+
+
+
+    <gap:platform name="ios" />
+    <gap:platform name="android" />
+    <gap:platform name="winphone" />
+
+
+
+    <preference name="phonegap-version" value="3.5.0" />
+
+
+
+
+
+</widget>
