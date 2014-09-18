@@ -60,6 +60,7 @@
       ul {
         box-sizing:border-box;
         width:100%;
+        padding:0;
       }
 
       li {
@@ -74,7 +75,6 @@
     </style>
 
     <script src="cordova.js"></script>
-    <script src="PushNotification.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0-beta.13/angular.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0-beta.13/angular-touch.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0-beta.13/angular-animate.js"></script>
@@ -105,9 +105,11 @@
 
 
           // handle APNS notifications for iOS
-          function onNotificationAPN(e) {
+          window.onNotificationAPN = function(e) {
+            $scope.notifications.push("push-notification received");
+
             if (e.alert) {
-              $scope.notifications.push("push-notification: ' + e.alert");
+              $scope.notifications.push(e.alert);
               navigator.notification.alert(e.alert);
             }
 
@@ -127,8 +129,8 @@
           }
 
           // handle GCM notifications for Android
-          function onNotificationGCM(e) {
-            $scope.notifications.push("EVENT -> RECEIVED:' + e.event");
+          window.onNotificationGCM = function(e) {
+            $scope.notifications.push("EVENT -> RECEIVED:" + e.event);
 
             switch (e.event) {
               case 'registered':
@@ -175,19 +177,19 @@
             $scope.$apply()
           }
 
-          function tokenHandler (result) {
+          var tokenHandler = function (result) {
             $scope.notifications.push("token: " + result);
             // Your iOS push server needs to know the token before it can push to this device
             // here is where you might want to send it the token for later use.
             $scope.$apply()
           }
 
-          function successHandler (result) {
+          var successHandler = function (result) {
             $scope.notifications.push("success: " + result);
             $scope.$apply()
           }
 
-          function errorHandler (error) {
+          var errorHandler = function (error) {
             $scope.notifications.push("error:" + error);
             $scope.$apply()
           }
