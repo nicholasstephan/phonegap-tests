@@ -1,12 +1,181 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="App">
   <head>
     <title>Test</title>
+
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi" />
+      
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css">
+    <link rel="stylesheet" href="http://cdn.nicholasstephan.com/glyphicons/1.8/glyphicons.css"/>
+    <style>
+
+      html, body {
+        width:100%;
+        min-height:100%;
+      }
+
+      body {
+        background: rgb(167,199,220);
+        background: -moz-linear-gradient(top,  rgba(167,199,220,1) 0%, rgba(133,178,211,1) 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(167,199,220,1)), color-stop(100%,rgba(133,178,211,1)));
+        background: -webkit-linear-gradient(top,  rgba(167,199,220,1) 0%,rgba(133,178,211,1) 100%);
+        background: -o-linear-gradient(top,  rgba(167,199,220,1) 0%,rgba(133,178,211,1) 100%);
+        background: -ms-linear-gradient(top,  rgba(167,199,220,1) 0%,rgba(133,178,211,1) 100%);
+        background: linear-gradient(to bottom,  rgba(167,199,220,1) 0%,rgba(133,178,211,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a7c7dc', endColorstr='#85b2d3',GradientType=0 );
+      }
+
+      button {
+        appearance:none;
+        width:100%;
+        height:50px;
+        padding:0;
+        border:0;
+        margin:0 0 8px 0;
+        background:#eee;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      section {
+        padding:32px;
+      }
+
+    </style>
+
+    <script src="cordova.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0-beta.13/angular.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0-beta.13/angular-touch.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0-beta.13/angular-animate.js"></script>
+    
+    <script>
+      angular.module('App', ['ngTouch', 'ngAnimate'])
+        .controller('AppCtrl', function($scope) {
+
+
+          $scope.share = function() {
+            console.log('share');
+            window.plugins.socialsharing.shareViaFacebook(
+              "Message", 
+              "A subject line",
+              "https://www.google.nl/images/srpr/logo4w.png", // image
+              null, // link url
+              function() {
+                console.log('share ok');
+              }, 
+              function(errormsg){
+                alert(errormsg);
+              }
+            );
+          };
+
+          $scope.shareTwitter = function() {
+            console.log('shareTwitter');
+            window.plugins.socialsharing.shareViaTwitter(
+              'Message via Twitter'
+            );
+          };
+
+          $scope.shareFacebook = function() {
+            console.log('shareFacebook');
+            window.plugins.socialsharing.shareViaFacebook(
+              'Message via Facebook', 
+              null, // image
+              null, // link url
+              function() {
+                console.log('share ok');
+              }, 
+              function(errormsg){
+                alert(errormsg);
+              }
+            );
+          };
+
+          $scope.shareEmail = function() {
+            console.log('shareEmail');
+            window.plugins.socialsharing.shareViaEmail(
+              'Message', // can contain HTML tags, but support on Android is rather limited:  http://stackoverflow.com/questions/15136480/how-to-send-html-content-with-image-through-android-default-email-client
+              'Subject',
+              ['to@person1.com', 'to@person2.com'], // TO: must be null or an array
+              ['cc@person1.com'], // CC: must be null or an array
+              null, // BCC: must be null or an array
+              ['https://www.google.nl/images/srpr/logo4w.png'], // FILES: can be null, a string, or an array
+              function() {}, // called when sharing worked, but also when the user cancelled sharing via email (I've found no way to detect the difference)
+              function() {} // called when sh*t hits the fan
+            );
+          };
+
+          $scope.shareSMS = function() {
+            console.log('shareSMS');
+            window.plugins.socialsharing.shareViaSMS(
+              'My cool message', 
+              '7602150986', // comma separated phone numbers
+              function(msg) {
+                console.log('ok: ' + msg);
+              }, 
+              function(msg) {
+                alert('error: ' + msg);
+              }
+            );
+          };
+
+          
+        })
+
+    </script>
+
   </head>
   <body>
-    <h1>Hello Phonegap</h1>
+    <div id="app" ng-controller="AppCtrl">
+      <h1>Test</h1>
+
+
+      <section>
+        <h2>Contacts</h2>
+
+      </section>
+
+
+      <section>
+        <h2>Camera</h2>
+
+      </section>
+
+
+      <section>
+        <h2>Sharing</h2>
+        <button ng-click="share()">
+          <i class="glyphicons share"></i>
+        </button>
+
+        <button ng-click="shareFacebook()">
+          <i class="social facebook"></i>
+        </button>
+
+        <button ng-click="shareTwitter()">
+          <i class="social twitter"></i>
+        </button>
+
+        <button ng-click="shareEmail()">
+          <i class="glyphicons envelope"></i>
+        </button>
+
+        <button ng-click="shareSMS()">
+          <i class="glyphicons chat"></i>
+        </button>
+      </section>
+
+
+
+      
+
+      
+
+
+    </div>
   </body>
 </html>
