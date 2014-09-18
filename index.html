@@ -80,6 +80,7 @@
               $scope.notifications.push("registering iOS");
               pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});    // required!
             }
+            $scope.$apply();
           });
 
           // handle APNS notifications for iOS
@@ -101,6 +102,7 @@
             if (e.badge) {
               pushNotification.setApplicationIconBadgeNumber(successHandler, e.badge);
             }
+            $scope.$apply()
           }
 
           // handle GCM notifications for Android
@@ -149,20 +151,24 @@
                 $scope.notifications.push("EVENT -> Unknown, an event was received and we do not know what i");
                 break;
             }
+            $scope.$apply()
           }
 
           function tokenHandler (result) {
-            $scope.notifications.push("token: " + resul);
+            $scope.notifications.push("token: " + result);
             // Your iOS push server needs to know the token before it can push to this device
             // here is where you might want to send it the token for later use.
+            $scope.$apply()
           }
 
           function successHandler (result) {
-            $scope.notifications.push("success: " + resul);
+            $scope.notifications.push("success: " + result);
+            $scope.$apply()
           }
 
           function errorHandler (error) {
-            $scope.notifications.push("error:" + erro);
+            $scope.notifications.push("error:" + error);
+            $scope.$apply()
           }
 
 
