@@ -325,6 +325,41 @@
             );
           };
 
+
+          OAuth.initialize('pyZoFPQdzd0gl1OtqecHsU3KZkI');
+
+          $scope.messageFacebook = function() {
+            OAuth.popup('facebook', {
+                cache: true
+            })
+            .done(function(result) {
+              //use result.access_token in your API request 
+              //or use result.get|post|put|del|patch|me methods (see below)
+              
+              alert('connected to facebook');
+            })
+            .fail(function (err) {
+              //handle error with err
+              alert('error')
+            });
+          };
+
+          $scope.messageTwitter = function() {
+            OAuth.popup('twitter', {
+                cache: true
+            })
+            .done(function(result) {
+              //use result.access_token in your API request 
+              //or use result.get|post|put|del|patch|me methods (see below)
+              
+              alert('connected to twitter');
+            })
+            .fail(function (err) {
+              //handle error with err
+              alert('error')
+            });
+          };
+
           
         });
 
@@ -378,11 +413,11 @@
         </button>
 
         <button ng-click="shareFacebook()">
-          <i class="social facebook"></i> Facebook
+          <i class="social facebook"></i> Facebook Post
         </button>
 
         <button ng-click="shareTwitter()">
-          <i class="social twitter"></i> Twitter
+          <i class="social twitter"></i> Twitter Post
         </button>
 
         <button ng-click="shareEmail()">
@@ -394,7 +429,18 @@
         </button>
       </section>
 
+      <section>
+        <h2>Messaging</h2>
 
+        <button ng-click="messageFacebook()">
+          <i class="social facebook"></i> Facebook Message
+        </button>
+
+        <button ng-click="messageTwitter()">
+          <i class="social twitter"></i> Twitter Message
+        </button>
+
+      </section>
 
       
 

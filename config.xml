@@ -24,7 +24,7 @@
 
     <preference name="phonegap-version" value="3.5.0" />
 
-
+    <access origin="*" />
 
 
     <!-- plugins -->
@@ -34,6 +34,7 @@
     <gap:plugin name="org.apache.cordova.contacts" version="0.2.11" />
     <gap:plugin name="org.apache.cordova.media-capture" version="0.2.8" />
     <gap:plugin name="nl.x-services.plugins.socialsharing" version="4.3.0" />
+    <gap:plugin name="com.oauthio.plugins.oauthio" version="0.2.4" />
     
     
 
