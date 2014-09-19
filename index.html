@@ -79,6 +79,88 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0-beta.13/angular-touch.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0-beta.13/angular-animate.js"></script>
     
+
+
+  </head>
+  <body>
+    <div id="app" ng-controller="AppCtrl">
+
+      <section>
+        <h2>Notifications</h2>
+
+        <ul>
+          <li ng-repeat="notification in notifications">{{notification}}</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Contacts</h2>
+
+        <button ng-click="pickDeviceContact()">
+          <i class="glyphicons parents"></i> Device Contacts
+        </button>
+
+
+      </section>
+
+
+      <section>
+        <h2>Media Capture</h2>
+
+        <button ng-click="captureAudio()">
+          <i class="glyphicons microphone"></i> Audio
+        </button>
+
+        <button ng-click="captureImage()">
+          <i class="glyphicons picture"></i> Image
+        </button>
+
+        <button ng-click="captureVideo()">
+          <i class="glyphicons facetime_video"></i> Video
+        </button>
+      </section>
+
+
+      <section>
+        <h2>Sharing</h2>
+
+        <button ng-click="share()">
+          <i class="glyphicons share"></i> Device Share
+        </button>
+
+        <button ng-click="shareFacebook()">
+          <i class="social facebook"></i> Facebook Post
+        </button>
+
+        <button ng-click="shareTwitter()">
+          <i class="social twitter"></i> Twitter Post
+        </button>
+
+        <button ng-click="shareEmail()">
+          <i class="glyphicons envelope"></i> Email
+        </button>
+
+        <button ng-click="shareSMS()">
+          <i class="glyphicons chat"></i> SMS
+        </button>
+      </section>
+
+      <section>
+        <h2>Messaging</h2>
+
+        <button ng-click="messageFacebook()">
+          <i class="social facebook"></i> Facebook Message
+        </button>
+
+        <button ng-click="messageTwitter()">
+          <i class="social twitter"></i> Twitter Message
+        </button>
+
+      </section>
+
+
+    </div>
+
     <script>
       angular.module('App', ['ngTouch', 'ngAnimate'])
         .controller('AppCtrl', function($scope) {
@@ -182,6 +264,7 @@
           }
 
           var tokenHandler = function (result) {
+            console.log('token: ', result);
             $scope.notifications.push("token: " + result);
             // Your iOS push server needs to know the token before it can push to this device
             // here is where you might want to send it the token for later use.
@@ -366,89 +449,5 @@
         });
 
     </script>
-
-  </head>
-  <body>
-    <div id="app" ng-controller="AppCtrl">
-
-      <section>
-        <h2>Notifications</h2>
-
-        <ul>
-          <li ng-repeat="notification in notifications">{{notification}}</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Contacts</h2>
-
-        <button ng-click="pickDeviceContact()">
-          <i class="glyphicons parents"></i> Device Contacts
-        </button>
-
-
-      </section>
-
-
-      <section>
-        <h2>Media Capture</h2>
-
-        <button ng-click="captureAudio()">
-          <i class="glyphicons microphone"></i> Audio
-        </button>
-
-        <button ng-click="captureImage()">
-          <i class="glyphicons picture"></i> Image
-        </button>
-
-        <button ng-click="captureVideo()">
-          <i class="glyphicons facetime_video"></i> Video
-        </button>
-      </section>
-
-
-      <section>
-        <h2>Sharing</h2>
-
-        <button ng-click="share()">
-          <i class="glyphicons share"></i> Device Share
-        </button>
-
-        <button ng-click="shareFacebook()">
-          <i class="social facebook"></i> Facebook Post
-        </button>
-
-        <button ng-click="shareTwitter()">
-          <i class="social twitter"></i> Twitter Post
-        </button>
-
-        <button ng-click="shareEmail()">
-          <i class="glyphicons envelope"></i> Email
-        </button>
-
-        <button ng-click="shareSMS()">
-          <i class="glyphicons chat"></i> SMS
-        </button>
-      </section>
-
-      <section>
-        <h2>Messaging</h2>
-
-        <button ng-click="messageFacebook()">
-          <i class="social facebook"></i> Facebook Message
-        </button>
-
-        <button ng-click="messageTwitter()">
-          <i class="social twitter"></i> Twitter Message
-        </button>
-
-      </section>
-
-      
-
-      
-
-
-    </div>
   </body>
 </html>
