@@ -100,6 +100,10 @@
               $scope.notifications.push("registering iOS");
               pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});    // required!
             // }
+            
+
+            OAuth.initialize('pyZoFPQdzd0gl1OtqecHsU3KZkI');
+            
             $scope.$apply();
           });
 
@@ -325,8 +329,6 @@
             );
           };
 
-
-          OAuth.initialize('pyZoFPQdzd0gl1OtqecHsU3KZkI');
 
           $scope.messageFacebook = function() {
             OAuth.popup('facebook', {
